@@ -35,5 +35,12 @@
             </ComboBox>
             <Button Content="הוסף"  Margin="80,30,0,30" Width="100" Height="22"/>
         </StackPanel>
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Vertical">
+                <CheckBox Content="לקנות חלב (דחיפות גבוהה) "/>
+                <CheckBox Content="ללמוד למבחן במתמטיקה (דחיפות בינונית) "/>
+            </StackPanel>
+            
+        </StackPanel>
     </Grid>
 </Window>
