@@ -1,24 +1,56 @@
-﻿using System.Text;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace TaskManger
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void ShowCalander(object sender, TextChangedEventArgs e)
+        {
+            if (newTaskTextBox.Text.ToString().Length > 0)
+                taskCalander.Visibility = Visibility.Visible;
+            else
+                taskCalander.Visibility = Visibility.Collapsed;
+        }
+
+        // פונקציית ההוספה בלחיצה על הלחצן
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(newTaskTextBox.Text))
+                return;
+
+            string taskText = newTaskTextBox.Text;
+
+            // בדיקת דחיפות מתוך ה-ComboBox
+            if (priorityComboBox.SelectedItem is ComboBoxItem selectedPriority)
+            {
+                taskText += $" (דחיפות: {selectedPriority.Content})";
+            }
+
+            // בדיקת תאריך מתוך לוח השנה
+            if (taskCalander.SelectedDate.HasValue)
+            {
+                string dateStr = taskCalander.SelectedDate.Value.ToString("dd/MM/yyyy");
+                taskText += $" - תאריך יעד: {dateStr}";
+            }
+
+            // יצירת משימה חדשה ברשימה
+            CheckBox newCheckBox = new CheckBox
+            {
+                Content = taskText
+            };
+
+            taskListPanel.Children.Add(newCheckBox);
+
+            // איפוס התיבה ולוח השנה
+            newTaskTextBox.Clear();
+            taskCalander.SelectedDate = null;
         }
     }
 }

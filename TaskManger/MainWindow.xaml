@@ -22,25 +22,31 @@
             <TextBlock Text="מנהל המשימות שלי" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26"/>
             <StackPanel Orientation="Horizontal">
                 <Button Height="30" Width="120" Margin="10" Content="משימות פעילות"/>
-                <Button Height="30" Width="120" Margin="0"  Content="משימות שהסתיימו"/>
+                <Button Height="30" Width="120" Margin="0" Content="משימות שהסתיימו"/>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Horizontal" Grid.Row="2" Grid.ColumnSpan="3">
-            <TextBlock Text=":משימה חדשה" Margin="80,30,0,0" FontSize="20"/>
-            <TextBox Margin="80,30,0,30" Width="206" Height="47"/>
-            <ComboBox Margin="80,30,0,30" Width="60">
-                <ComboBoxItem Content="נמוכה"/>
-                <ComboBoxItem Content="בינונית"/>
-                <ComboBoxItem Content="גבוהה"/>
-            </ComboBox>
-            <Button Content="הוסף"  Margin="80,30,0,30" Width="100" Height="22"/>
-        </StackPanel>
+
+        <!-- הוספנו x:Name="taskListPanel" לשורת ה-StackPanel -->
         <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
-            <StackPanel Orientation="Vertical">
+            <StackPanel x:Name="taskListPanel" Orientation="Vertical">
                 <CheckBox Content="לקנות חלב (דחיפות גבוהה) "/>
                 <CheckBox Content="ללמוד למבחן במתמטיקה (דחיפות בינונית) "/>
             </StackPanel>
-            
         </StackPanel>
+
+        <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text=":משימה חדשה" Margin="80,30,0,0" FontSize="20"/>
+                <TextBox x:Name="newTaskTextBox" TextChanged="ShowCalander" Margin="80,30,0,30" Width="206" Height="47"/>
+                <ComboBox x:Name="priorityComboBox" Margin="80,30,0,30" Width="60">
+                    <ComboBoxItem Content="נמוכה"/>
+                    <ComboBoxItem Content="בינונית"/>
+                    <ComboBoxItem Content="גבוהה"/>
+                </ComboBox>
+                <!-- הוספנו Click="AddButton_Click" לכפתור -->
+                <Button Content="הוסף" Click="AddButton_Click" Margin="80,30,0,30" Width="100" Height="22"/>
+            </StackPanel>
+        </StackPanel>
+        <Calendar x:Name="taskCalander" Visibility="Visible" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
     </Grid>
 </Window>
