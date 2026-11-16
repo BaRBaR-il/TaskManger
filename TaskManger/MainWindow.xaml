@@ -25,14 +25,14 @@
                 <Button Height="30" Width="120" Margin="0" Content="משימות שהסתיימו"/>
             </StackPanel>
         </StackPanel>
-
         <!-- הוספנו x:Name="taskListPanel" לשורת ה-StackPanel -->
-        <StackPanel Grid.Row="1" Grid.ColumnSpan="3">
-            <StackPanel x:Name="taskListPanel" Orientation="Vertical">
-                <CheckBox Content="לקנות חלב (דחיפות גבוהה) "/>
-                <CheckBox Content="ללמוד למבחן במתמטיקה (דחיפות בינונית) "/>
-            </StackPanel>
-        </StackPanel>
+        <ListView x:Name="taskListPanel" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <CheckBox Content="{Binding}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal">
@@ -43,10 +43,10 @@
                     <ComboBoxItem Content="בינונית"/>
                     <ComboBoxItem Content="גבוהה"/>
                 </ComboBox>
-                <!-- הוספנו Click="AddButton_Click" לכפתור -->
+                <!-- הוספנו Click="AddButton_Click"  -->
                 <Button Content="הוסף" Click="AddButton_Click" Margin="80,30,0,30" Width="100" Height="22"/>
             </StackPanel>
         </StackPanel>
-        <Calendar x:Name="taskCalander" Visibility="Visible" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
+        <Calendar x:Name="taskCalander" Visibility="Collapsed" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"/>
     </Grid>
 </Window>
