@@ -25,7 +25,6 @@
                 <Button Height="30" Width="120" Margin="0" Content="משימות שהסתיימו"/>
             </StackPanel>
         </StackPanel>
-        <!-- הוספנו x:Name="taskListPanel" לשורת ה-StackPanel -->
         <Border x:Name="activeBorder" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5" BorderThickness="10" Visibility="Visible">
             <ListView x:Name="taskListPanel">
                 <ListView.ItemTemplate>
