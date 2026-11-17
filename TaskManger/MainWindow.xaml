@@ -26,25 +26,29 @@
             </StackPanel>
         </StackPanel>
         <!-- הוספנו x:Name="taskListPanel" לשורת ה-StackPanel -->
-        <ListView x:Name="taskListPanel" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <CheckBox Content="{Binding}"/>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+        <Border x:Name="activeBorder" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5" BorderThickness="10" Visibility="Visible">
+            <ListView x:Name="taskListPanel">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox Content="{Binding}" Checked="TaskCheckBoxChecked"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal">
                 <TextBlock Text=":משימה חדשה" Margin="80,30,0,0" FontSize="20"/>
-                <TextBox x:Name="newTaskTextBox" TextChanged="ShowCalander" Margin="80,30,0,30" Width="206" Height="47"/>
+                <Border x:Name="newTaskBoder" BorderThickness="10" Visibility="Visible" Margin="80,30,0,30" Width="216" Height="57">
+                    <TextBox x:Name="newTaskTextBox" TextChanged="ShowCalander" />
+                </Border>
                 <ComboBox x:Name="priorityComboBox" Margin="80,30,0,30" Width="60">
                     <ComboBoxItem Content="נמוכה"/>
                     <ComboBoxItem Content="בינונית"/>
                     <ComboBoxItem Content="גבוהה"/>
                 </ComboBox>
                 <!-- הוספנו Click="AddButton_Click"  -->
-                <Button Content="הוסף" Click="AddButton_Click" Margin="80,30,0,30" Width="100" Height="22"/>
+                <Button Content="הוסף" Click="AddButtonClick" Margin="80,30,0,30" Width="100" Height="22"/>
             </StackPanel>
         </StackPanel>
         <Calendar x:Name="taskCalander" Visibility="Collapsed" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="2"/>

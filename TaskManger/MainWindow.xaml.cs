@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace TaskManger
 {
     public partial class MainWindow : Window
     {
         List<Tasks> activeTasks = new List<Tasks>
+        {
+
+        };
+        List<Tasks> finishedTasks = new List<Tasks>
         {
 
         };
@@ -24,14 +29,14 @@ namespace TaskManger
         }
 
         // פונקציית ההוספה בלחיצה על הלחצן
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private void AddButtonClick(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(newTaskTextBox.Text) == false)
             {
+                //ActiveBorder.BorderBrush = Brushes.White;
+                newTaskBoder.BorderBrush = Brushes.White;
                 Tasks newTask = new Tasks();
                 newTask.Name = newTaskTextBox.Text;
-
-                // בדיקת דחיפות מתוך ה-ComboBox
                 {   if(priorityComboBox.SelectedItem==null)
                         newTask.Priorty = "גבוהה"; //ברירת מחדל
                     else if (priorityComboBox.SelectedItem is ComboBoxItem selectedPriority)
@@ -62,6 +67,22 @@ namespace TaskManger
                 //   איפוס התיבה ולוח השנה והמשימה
                 newTaskTextBox.Clear();
                 taskCalander.SelectedDate = null;
+                priorityComboBox.SelectedItem = null;
+            }
+            else
+            {
+                //activeBorder.BorderBrush=Brushes.Red;
+                newTaskBoder.BorderBrush = Brushes.Red;
+            }
+        }
+        private void TaskCheckBoxChecked(object sender, RoutedEventArgs e)
+        {
+            if (sender is CheckBox clickedCheckBox && clickedCheckBox.Content is Tasks selectedTask)
+            {
+                activeTasks.Remove(selectedTask);
+                finishedTasks.Add(selectedTask);
+                taskListPanel.ItemsSource = null;
+                taskListPanel.ItemsSource = activeTasks;
             }
         }
     }
