@@ -37,7 +37,7 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="2" Grid.ColumnSpan="3">
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text=":משימה חדשה" Margin="80,30,0,0" FontSize="20"/>
+                <TextBlock Text=":משימה חדשה" Margin="79,30,0,0" FontSize="20"/>
                 <Border x:Name="newTaskBoder" BorderThickness="10" Visibility="Visible" Margin="80,30,0,30" Width="216" Height="57">
                     <TextBox x:Name="newTaskTextBox" TextChanged="ShowCalander" />
                 </Border>
