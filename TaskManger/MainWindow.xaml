@@ -4,8 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:TaskManger"
+        xmlns:conv="clr-namespace:TaskManger.Coverters"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    <Window.Resources>
+        <conv:DaysRemainingConverter x:Key="DaysConverter"/>
+        <conv:OverdueToColorConverter x:Key="ColorConverter"/>
+    </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="3*"/>
@@ -21,15 +26,22 @@
             <Image Source="/Images/AlarmClock.jpg" Height="169" Width="203"/>
             <TextBlock Text="מנהל המשימות שלי" HorizontalAlignment="Center" FontWeight="Bold" FontSize="26"/>
             <StackPanel Orientation="Horizontal">
-                <Button Height="30" Width="120" Margin="10" Content="משימות פעילות"/>
-                <Button Height="30" Width="120" Margin="0" Content="משימות שהסתיימו"/>
+                <Button Height="30" Width="120" Margin="10" Content="משימות פעילות" Click="ActiveTasksClicked"/>
+                <Button Height="30" Width="120" Margin="0" Content="משימות שהסתיימו" Click="FinishedTasksClicked"/>
             </StackPanel>
         </StackPanel>
-        <Border x:Name="activeBorder" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5" BorderThickness="10" Visibility="Visible">
+        <Border x:Name="MainListBorder" Grid.Row="1" Grid.ColumnSpan="3" Margin="20,5" BorderThickness="10" Visibility="Visible">
             <ListView x:Name="taskListPanel">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <CheckBox Content="{Binding}" Checked="TaskCheckBoxChecked"/>
+                        <StackPanel Orientation="Horizontal">
+                            <CheckBox Checked="TaskCheckBoxChecked" VerticalAlignment="Center"/>
+                            <TextBlock Text="{Binding Name}" FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Priorty}" VerticalAlignment="Center" Margin="5"/>
+                            <TextBlock Text="{Binding Date, Converter={StaticResource DaysConverter}}"
+                           Foreground="{Binding Date, Converter={StaticResource ColorConverter}}"
+                           FontWeight="Bold" VerticalAlignment="Center" Margin="5"/>
+                        </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

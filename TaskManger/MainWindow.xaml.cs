@@ -77,13 +77,29 @@ namespace TaskManger
         }
         private void TaskCheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            if (sender is CheckBox clickedCheckBox && clickedCheckBox.Content is Tasks selectedTask)
+            if (sender is CheckBox clickedCheckBox && clickedCheckBox.DataContext is Tasks selectedTask)
             {
-                activeTasks.Remove(selectedTask);
-                finishedTasks.Add(selectedTask);
-                taskListPanel.ItemsSource = null;
-                taskListPanel.ItemsSource = activeTasks;
+                if (activeTasks.Remove(selectedTask))
+                {
+                    finishedTasks.Add(selectedTask);
+
+                    taskListPanel.ItemsSource = null;
+                    taskListPanel.ItemsSource = activeTasks;
+                }
+
             }
+        }
+
+        private void FinishedTasksClicked(object sender, RoutedEventArgs e)
+        {
+            taskListPanel.ItemsSource = null;
+            taskListPanel.ItemsSource = finishedTasks;
+        }
+
+        private void ActiveTasksClicked(object sender, RoutedEventArgs e)
+        {
+            taskListPanel.ItemsSource = null;
+            taskListPanel.ItemsSource = activeTasks;
         }
     }
 }
